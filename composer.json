@@ -1,0 +1,20 @@
+{
+    "name": "nobodyiscertain/laravel-db-commands",
+    "description": "A set of Artisan commands to help with database tasks.",
+    "keywords": ["laravel", "artisan", "database"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Jamie Wagner",
+            "email": "hello@jamiewagner.me"
+        }
+    ],
+    "autoload": {
+      "psr-4": {
+        "Nobodyiscertain\\DbCommands\\": "src/"
+      }
+    },
+    "require": {
+        "illuminate/support": "~5.1"
+    }
+}

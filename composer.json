@@ -16,5 +16,8 @@
     },
     "require": {
         "illuminate/support": "~5.1"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~5.0"
     }
 }

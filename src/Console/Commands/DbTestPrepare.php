@@ -39,12 +39,15 @@ class DbTestPrepare extends Command
     public function handle(Config $config)
     {
         $db_conn = $config->get('laravel-db-commands.testing_db_connection');
+        $run_seeds = $config->get('laravel-db-commands.testing_run_seeds');
 
-        $this->info("Running migrations on $db_conn database.");
+        $this->info("Refreshing migrations on $db_conn database.");
         $this->call('migrate:refresh', ['--database' => $db_conn]);
 
-        $this->info("Running seed scripts on $db_conn database.");
-        $this->call('db:seed', ['--database' => $db_conn]);
+        if ($run_seeds) {
+            $this->info("Running seed scripts on $db_conn database.");
+            $this->call('db:seed', ['--database' => $db_conn]);
+        }
 
         $this->info('Happy Testing!');
     }

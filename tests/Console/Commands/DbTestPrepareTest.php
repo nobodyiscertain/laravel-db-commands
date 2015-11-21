@@ -33,9 +33,14 @@ class DbTestPrepareTest extends PHPUnit_Framework_TestCase
     /** @test **/
     public function it_calls_migrate_command_and_seeds()
     {
+        $this->configMock
+            ->shouldReceive('get')
+            ->with('laravel-db-commands.testing_run_seeds')
+            ->andReturn(true);
+
         $this->commandMock
             ->shouldReceive('info')
-            ->with('Running migrations on testing database.')
+            ->with('Refreshing migrations on testing database.')
             ->once()
             ->andReturnNull();
 
@@ -54,6 +59,45 @@ class DbTestPrepareTest extends PHPUnit_Framework_TestCase
         $this->commandMock
             ->shouldReceive('call')
             ->once()
+            ->with('db:seed', ['--database' => 'testing'])
+            ->andReturnNull();
+
+        $this->commandMock
+            ->shouldReceive('info')
+            ->once()
+            ->with('Happy Testing!')
+            ->andReturnNull();
+
+        $this->commandMock->handle($this->configMock);
+    }
+
+    /** @test **/
+    public function it_does_not_run_seeds()
+    {
+        $this->configMock
+            ->shouldReceive('get')
+            ->with('laravel-db-commands.testing_run_seeds')
+            ->andReturn(false);
+
+        $this->commandMock
+            ->shouldReceive('info')
+            ->with('Refreshing migrations on testing database.')
+            ->once()
+            ->andReturnNull();
+
+        $this->commandMock
+            ->shouldReceive('call')
+            ->once()
+            ->with('migrate:refresh', ['--database' => 'testing'])
+            ->andReturnNull();
+
+        $this->commandMock
+            ->shouldNotReceive('info')
+            ->with('Running seed scripts on testing database.')
+            ->andReturnNull();
+
+        $this->commandMock
+            ->shouldNotReceive('call')
             ->with('db:seed', ['--database' => 'testing'])
             ->andReturnNull();
 

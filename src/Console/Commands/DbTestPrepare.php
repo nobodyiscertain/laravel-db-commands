@@ -3,6 +3,7 @@
 namespace Nobodyiscertain\DbCommands\Console\Commands;
 
 use Illuminate\Console\Command;
+use Illuminate\Config\Repository as Config;
 
 class DbTestPrepare extends Command
 {
@@ -35,9 +36,9 @@ class DbTestPrepare extends Command
      *
      * @return mixed
      */
-    public function handle()
+    public function handle(Config $config)
     {
-        $db_conn = config('laravel-db-commands.testing_db_connection');
+        $db_conn = $config->get('laravel-db-commands.testing_db_connection');
 
         $this->info("Running migrations on $db_conn database.");
         $this->call('migrate:refresh', ['--database' => $db_conn]);

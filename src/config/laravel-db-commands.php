@@ -33,7 +33,7 @@ return [
     'backup_db_conn' => 'mysql',
 
     /*
-     * The destination to store the backup locally.
+     * The destination to temporarily store the backup locally.
      */
     'backup_dump_destination' => '/tmp',
 

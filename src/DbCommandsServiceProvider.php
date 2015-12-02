@@ -18,7 +18,7 @@ class DbCommandsServiceProvider extends ServiceProvider
     {
         // DB Pull
         $this->app->singleton('command.db.pull', function ($app) {
-            return $app['Nobodyiscertain\DbCommands\Console\Commands\DbPullCommand'];
+            return $app['Nobodyiscertain\DbCommands\Console\Commands\DbPull'];
         });
         $this->commands('command.db.pull');
 

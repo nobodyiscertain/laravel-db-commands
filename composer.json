@@ -21,6 +21,7 @@
         "phpunit/phpunit": "~5.0",
         "illuminate/console": "~5.1",
         "illuminate/config": "~5.1",
-        "mockery/mockery": "0.9.*"
+        "mockery/mockery": "0.9.*",
+        "illuminate/filesystem": "^5.1"
     }
 }

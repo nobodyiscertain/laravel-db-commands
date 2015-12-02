@@ -1,10 +1,11 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "132b3a8a69ac7eb39ded0efd75463510",
+    "hash": "92af4117f9569312d1bb79f623f5900e",
+    "content-hash": "230b73f593c643f704d1e45578fe79ea",
     "packages": [
         {
             "name": "danielstjules/stringy",
@@ -424,16 +425,16 @@
         },
         {
             "name": "illuminate/filesystem",
-            "version": "v5.1.22",
+            "version": "v5.1.25",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/filesystem.git",
-                "reference": "d2df6ede91e6af495674f2def38170330319819f"
+                "reference": "c5c9bb3cd12f67b8dfd843e6b82512801f9c7c0e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/filesystem/zipball/d2df6ede91e6af495674f2def38170330319819f",
-                "reference": "d2df6ede91e6af495674f2def38170330319819f",
+                "url": "https://api.github.com/repos/illuminate/filesystem/zipball/c5c9bb3cd12f67b8dfd843e6b82512801f9c7c0e",
+                "reference": "c5c9bb3cd12f67b8dfd843e6b82512801f9c7c0e",
                 "shasum": ""
             },
             "require": {
@@ -470,7 +471,7 @@
             ],
             "description": "The Illuminate Filesystem package.",
             "homepage": "http://laravel.com",
-            "time": "2015-10-19 06:01:02"
+            "time": "2015-11-29 16:58:05"
         },
         {
             "name": "mockery/mockery",

@@ -10,7 +10,7 @@ class DbCommandsServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->publishes([
-            __DIR__ . '/config' => config_path('laravel-db-commands'),
+            __DIR__ . '/config/laravel-db-commands.php' => config_path('laravel-db-commands.php'),
         ]);
     }
 

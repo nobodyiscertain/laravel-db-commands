@@ -28,6 +28,12 @@ class DbCommandsServiceProvider extends ServiceProvider
         });
         $this->commands('command.db.test-prepare');
 
+        // DB Backup
+        $this->app->singleton('command.db.backup', function ($app) {
+            return $app['Nobodyiscertain\DbCommands\Console\Commands\DbBackup'];
+        });
+        $this->commands('command.db.backup');
+
         $this->mergeConfigFrom(
             __DIR__ . '/config/laravel-db-commands.php', 'laravel-db-commands'
         );

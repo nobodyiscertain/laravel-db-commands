@@ -7,4 +7,8 @@ return [
     'dbpull_auto_import' => true,
     'dbpull_local_db_conn' => 'mysql',
     'dbpull_dump_destination' => '/tmp',
+
+    'backup_db_conn' => 'mysql',
+    'backup_dump_destination' => '/tmp',
+    'backup_disk' => 's3',
 ];

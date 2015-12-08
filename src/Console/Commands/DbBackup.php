@@ -8,7 +8,6 @@ use Illuminate\Filesystem\FilesystemManager as Storage;
 
 class DbBackup extends Command
 {
-
     /**
      * The console command name.
      *
@@ -43,22 +42,34 @@ class DbBackup extends Command
         $conn = $config->get('laravel-db-commands.backup_db_conn');
         $db = $config->get("database.connections.$conn");
         $dump_dest = $config->get('laravel-db-commands.backup_dump_destination');
-        $backup_disk = $config->get('laravel-db-commands.backup_disk');
+        $backup_disk_name = $config->get('laravel-db-commands.backup_disk');
+        $backup_disk = $storage->disk($backup_disk_name);
+        $backup_name = $db['database'] . '-' . time() . '.sql.gz';
+        $tmp_file = "$dump_dest/$backup_name";
 
+        $this->dumpMysqlDatabase($db, $tmp_file);
+
+        $this->uploadDumpToDisk($backup_disk, $backup_name, $tmp_file);
+    }
+
+    protected function dumpMysqlDatabase($db, $tmp_file)
+    {
         $db_host = $db['host'];
         $db_name = $db['database'];
         $db_user = $db['username'];
         $db_pass = $db['password'];
 
-        $backup_name = $db_name . '-' . time() . '.sql.gz';
-        $tmp_file = "$dump_dest/$backup_name";
-
         $this->info("Generating Backup File");
-        $output = shell_exec("mysqldump -h $db_host -u $db_user -p$db_pass $db_name | gzip > $tmp_file");
-        $this->info($output);
 
-        $this->info("Uploading database to S3");
-        $s3 = $storage->disk($backup_disk);
-        $s3->put($backup_name, file_get_contents($tmp_file));
+        $output = shell_exec("mysqldump -h $db_host -u $db_user -p$db_pass $db_name | gzip > $tmp_file");
+
+        $this->info($output);
+    }
+
+    protected function uploadDumpToDisk($disk, $name, $file)
+    {
+        $this->info("Uploading database to disk");
+
+        $disk->put($name, file_get_contents($file));
     }
 }
